@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public PedestrianNetwork network;
-    public PedestrianAgent prefab;
+    public MoveableObject_Network network;
+    public MoveableObject prefab;
 
     public void SpwanPeople()
     {
-        PedestrianAgent people = Instantiate(prefab);
+        MoveableObject people = Instantiate(prefab);
         people.Spawn();        
     }
 }

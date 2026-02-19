@@ -1,18 +1,18 @@
 using UnityEngine;
 
-public class PedestrianAgent : MonoBehaviour
+public class MoveableObject : MonoBehaviour
 {
     public float speed = 2f;
 
-    private PedestrianRoute currentRoute;
+    private MoveableObject_Route currentRoute;
     private int nodeIndex;
-    private PedestrianNetwork network;
+    private MoveableObject_Network network;
     private Transform currentGate;
 
     public void Spawn()
     {
         if (network == null)
-            network = FindObjectOfType<PedestrianNetwork>();
+            network = FindObjectOfType<MoveableObject_Network>();
 
         currentGate = network.gates[Random.Range(0, network.gates.Count)];
 
@@ -66,12 +66,17 @@ public class PedestrianAgent : MonoBehaviour
 
     void Respawn()
     {
-        Transform newGate = network.GetRandomGateExcept(currentGate);
-
-        currentGate = newGate;
+        currentGate = currentRoute.endGate;
         transform.position = currentGate.position;
 
         ChooseNewRoute();
+
+        if (currentRoute == null)
+        {
+            currentGate = network.GetRandomGateExcept(currentGate);
+            transform.position = currentGate.position;
+            ChooseNewRoute();
+        }
     }
 
     void ChooseNewRoute()

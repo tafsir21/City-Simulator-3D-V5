@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PedestrianRoute : MonoBehaviour
+public class MoveableObject_Route : MonoBehaviour
 {
     public Transform startGate;
     public Transform endGate;

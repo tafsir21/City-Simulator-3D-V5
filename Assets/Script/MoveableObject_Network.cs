@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PedestrianNetwork : MonoBehaviour
+public class MoveableObject_Network : MonoBehaviour
 {
     public List<Transform> gates = new List<Transform>();
-    public List<PedestrianRoute> routes = new List<PedestrianRoute>();
+    public List<MoveableObject_Route> routes = new List<MoveableObject_Route>();
 
-    public PedestrianRoute GetRandomRoute(Transform startGate)
+    public MoveableObject_Route GetRandomRoute(Transform startGate)
     {
-        List<PedestrianRoute> possible = new List<PedestrianRoute>();
+        List<MoveableObject_Route> possible = new List<MoveableObject_Route>();
 
         foreach (var r in routes)
         {
