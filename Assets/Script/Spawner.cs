@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public MoveableObject_Network network;
-    public MoveableObject prefab;
+    public MoveableObject npc_human_prefab;
 
     public void SpwanPeople()
     {
-        MoveableObject people = Instantiate(prefab);
+        MoveableObject people = Instantiate(npc_human_prefab);
         people.Spawn();        
     }
 }

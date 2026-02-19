@@ -2649,7 +2649,7 @@ GameObject:
   m_Component:
   - component: {fileID: 600354779}
   m_Layer: 0
-  m_Name: Gates
+  m_Name: Tax Office Gates
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3350,7 +3350,7 @@ GameObject:
   - component: {fileID: 730532860}
   - component: {fileID: 730532861}
   m_Layer: 0
-  m_Name: Predestrian Networks
+  m_Name: NPC_Human Networks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6290,7 +6290,7 @@ GameObject:
   - component: {fileID: 1306253104}
   - component: {fileID: 1306253105}
   m_Layer: 0
-  m_Name: Predestrian Manager
+  m_Name: NPC_Human Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6324,8 +6324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc92cce9fded4de4ba895b8516cc9d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  network: {fileID: 730532861}
-  prefab: {fileID: 2888217529033451156, guid: 39d28c7505205e2499f8989d5369d86b, type: 3}
+  npc_human_prefab: {fileID: 5092082896960193510, guid: 65bf75a1e74107e4aae2df74160567a3, type: 3}
 --- !u!1 &1320631092
 GameObject:
   m_ObjectHideFlags: 0
@@ -8829,8 +8828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc92cce9fded4de4ba895b8516cc9d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  network: {fileID: 730532861}
-  prefab: {fileID: 5092082896960193510, guid: 65bf75a1e74107e4aae2df74160567a3, type: 3}
+  npc_human_prefab: {fileID: 5092082896960193510, guid: 65bf75a1e74107e4aae2df74160567a3, type: 3}
 --- !u!1 &2125182912
 GameObject:
   m_ObjectHideFlags: 0

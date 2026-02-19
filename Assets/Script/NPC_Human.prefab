@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 3168213482768916585}
   - component: {fileID: 5092082896960193510}
   m_Layer: 0
-  m_Name: PredestrianAgent
+  m_Name: NPC_Human
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
