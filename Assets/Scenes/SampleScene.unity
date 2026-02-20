@@ -9410,9 +9410,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc92cce9fded4de4ba895b8516cc9d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npc_human_prefab: {fileID: 5092082896960193510, guid: 65bf75a1e74107e4aae2df74160567a3, type: 3}
+  npc_human_prefabs:
+  - {fileID: 5092082896960193510, guid: 65bf75a1e74107e4aae2df74160567a3, type: 3}
   humanNetwork: {fileID: 730532861}
-  npc_car_prefab: {fileID: 8111806440455551414, guid: a485d3c8af50db247accb7a81b149d6a, type: 3}
+  npc_car_prefabs:
+  - {fileID: 8111806440455551414, guid: a485d3c8af50db247accb7a81b149d6a, type: 3}
+  - {fileID: 1834230198277461015, guid: 588a0a7fbfaf87f4d89a95ff6133cfe5, type: 3}
+  - {fileID: 8906954571724014902, guid: 767710bf844fb5144a63db13f21897fc, type: 3}
   carNetwork: {fileID: 143790944}
 --- !u!1 &2125182912
 GameObject:
@@ -9537,7 +9541,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &137038453415851306
 MeshRenderer:
   m_ObjectHideFlags: 0
