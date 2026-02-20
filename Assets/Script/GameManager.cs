@@ -4,7 +4,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    private int money = 0; // Private variable to track money
+    [SerializeField] private int money = 0; 
 
     private void Awake()
     {
@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
         if (amount > 0)
         {
             money += amount;
+            UIManager.instance.UpdateMoneyUI(money); // Update the UI whenever money is added
         }
     }
 
@@ -27,27 +28,18 @@ public class GameManager : MonoBehaviour
         if (amount > 0 && money >= amount)
         {
             money -= amount;
-            return true; 
+            UIManager.instance.UpdateMoneyUI(money); // Update the UI whenever money is removed
+            return true;
         }
         else
         {
-            Debug.Log("no money");
-            return false; 
+            Debug.Log("Not enough money.");
+            return false;
         }
     }
 
     public int GetCurrentMoney()
     {
         return money;
-    }
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
     }
 }
