@@ -3,21 +3,22 @@ using UnityEngine;
 public class MoveableObject : MonoBehaviour
 {
     public float speed = 2f;
+    public MoveableObject_Network network;   // assign in prefab
 
     private MoveableObject_Route currentRoute;
     private int nodeIndex;
-    private MoveableObject_Network network;
     private Transform currentGate;
 
     public void Spawn()
     {
         if (network == null)
-            network = FindObjectOfType<MoveableObject_Network>();
+        {
+            Debug.LogError("No network assigned to " + gameObject.name);
+            return;
+        }
 
         currentGate = network.gates[Random.Range(0, network.gates.Count)];
-
         transform.position = currentGate.position;
-
         ChooseNewRoute();
     }
 
