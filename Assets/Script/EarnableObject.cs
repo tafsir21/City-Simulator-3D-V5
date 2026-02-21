@@ -36,7 +36,10 @@ public class EarnableObject : MonoBehaviour
     {
         GameManager.instance.AddMoney(earnableObjectSO.moneyPerSecond);
 
-        StartCoroutine(SpawnCashWithDelay());
+        if (!earnableObjectSO.isTaxOfficeObject)
+        {
+            StartCoroutine(SpawnCashWithDelay());
+        }
     }
 
     void SpawnCash()

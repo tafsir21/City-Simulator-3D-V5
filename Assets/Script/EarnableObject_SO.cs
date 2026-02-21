@@ -7,6 +7,6 @@ public class EarnableObject_SO : ScriptableObject
     public Sprite icon;
     public int price;
     public int moneyPerSecond;
-
     public GameObject cashPrefab;  
+    public bool isTaxOfficeObject = false;
 }

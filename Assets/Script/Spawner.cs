@@ -6,7 +6,10 @@ public class Spawner : MonoBehaviour
     public MoveableObject_Network humanNetwork;
     public MoveableObject_Network carNetwork;
 
-    [Header("Prefabs")]
+    [Header("Static Prefabs")]
+    public StaticObject taxOfficeV2;
+
+    [Header("Moveable Prefabs")]
     public MoveableObject[] npc_human_prefabs;
     public MoveableObject[] npc_car_prefabs;
     public MoveableObject[] npc_truck_prefabs;
@@ -26,6 +29,18 @@ public class Spawner : MonoBehaviour
     public void SpawnPeople()  => SpawnFrom(npc_human_prefabs, humanNetwork, ref lastHumanIndex, "human");
     public void SpawnTaxi()    => SpawnFrom(npc_car_prefabs,   carNetwork,   ref lastCarIndex,   "car");
     public void SpawnTruck()   => SpawnFrom(npc_truck_prefabs, carNetwork,   ref lastTruckIndex, "truck");
+
+
+
+    public void SpwanTaxOfficeV2()
+    {
+        if (!taxOfficeV2.gameObject.activeSelf)
+        {
+            taxOfficeV2.gameObject.SetActive(true);
+            taxOfficeV2.PlayEffectAnim();        
+            taxOfficeV2.PlayDropAnim();        
+        }
+    }
 
     private void SpawnFrom(MoveableObject[] prefabs, MoveableObject_Network network, ref int lastIndex, string label)
     {
