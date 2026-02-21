@@ -3,7 +3,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
+    public Transform taxOfficeTransform;
     [SerializeField] private int money = 0; 
 
     private void Awake()

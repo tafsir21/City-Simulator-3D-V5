@@ -1,31 +1,69 @@
 using UnityEngine;
+using System.Collections;
 
 public class EarnableObject : MonoBehaviour
 {
-    public EarnableObject_SO earnableObjectSO;  // ScriptableObject reference for money per second
-    private float timer = 0f;                   // Timer to track time
-    private bool isEarning = true;              // Flag to control if we are earning money
+    public EarnableObject_SO earnableObjectSO;
+
+    private float timer;
+    private bool isEarning = true;
 
     void Update()
     {
-        if (isEarning)
+        if (!isEarning || earnableObjectSO == null) return;
+
+        timer += Time.deltaTime;
+
+        if (timer >= 1.5f)
         {
-            timer += Time.deltaTime;
-            if (timer >= 1.5f)   // Wait for 1 sec
-            {
-                EarnMoney();
-                timer -= 1.5f;    // Reset timer
-            }
+            EarnMoney();
+            timer -= 1.5f;
         }
     }
 
     void EarnMoney()
     {
-        // Ensure the earnableObjectSO exists and has valid data
-        if (earnableObjectSO != null)
+        GameManager.instance.AddMoney(earnableObjectSO.moneyPerSecond);
+
+        for (int i = 0; i < earnableObjectSO.moneyPerSecond; i++)
         {
-            // Add money to the GameManager
-            GameManager.instance.AddMoney(earnableObjectSO.moneyPerSecond);
+            SpawnCash();
         }
+    }
+
+    void SpawnCash()
+    {
+        GameObject cash = Instantiate(
+            earnableObjectSO.cashPrefab,
+            transform.position,
+            Quaternion.identity
+        );
+
+        StartCoroutine(JumpToTaxOffice(cash));
+    }
+
+    IEnumerator JumpToTaxOffice(GameObject cash)
+    {
+        Vector3 start = cash.transform.position;
+        Vector3 target = GameManager.instance.taxOfficeTransform.position;
+
+        float duration = 0.8f;
+        float elapsed = 0f;
+        float height = 2f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+
+            Vector3 pos = Vector3.Lerp(start, target, t);
+            pos.y += Mathf.Sin(t * Mathf.PI) * height;
+
+            cash.transform.position = pos;
+
+            yield return null;
+        }
+
+        Destroy(cash);
     }
 }

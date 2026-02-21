@@ -96,6 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1104794734937757826}
   - component: {fileID: 1834230198277461015}
+  - component: {fileID: 6384628656876429702}
   m_Layer: 0
   m_Name: CAR_02 (1)
   m_TagString: Untagged
@@ -133,3 +134,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 40
   network: {fileID: 0}
+--- !u!114 &6384628656876429702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5300101570583936891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b24c486f1a089f040b438b7136e43363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  earnableObjectSO: {fileID: 11400000, guid: e9b8b202a1cc1af48b78cac038e8a9e6, type: 2}

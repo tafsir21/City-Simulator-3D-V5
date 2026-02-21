@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5df528ceee2a248489f62b237ebddc1b, type: 3}
-  m_Name: NPC_Human
+  m_Name: NPC_Taxi
   m_EditorClassIdentifier: 
-  objectName: People
+  objectName: Taxi
   icon: {fileID: 0}
   price: 0
-  moneyPerSecond: 1
+  moneyPerSecond: 2
   cashPrefab: {fileID: 3401879956718678042, guid: 89c4573290f3c6b42b5c4d4b16d2dbe1, type: 3}

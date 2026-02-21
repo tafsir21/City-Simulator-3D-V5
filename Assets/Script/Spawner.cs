@@ -2,13 +2,21 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    [Header("Networks")]
+    public MoveableObject_Network humanNetwork;
+    public MoveableObject_Network carNetwork;
+
+
     [Header("Humans")]
     public MoveableObject[] npc_human_prefabs;
-    public MoveableObject_Network humanNetwork;
 
-    [Header("Cars")]
+    [Header("Cars (Taxi)")]
     public MoveableObject[] npc_car_prefabs;
-    public MoveableObject_Network carNetwork;
+
+    [Header("Truck")]
+    public MoveableObject[] npc_truck_prefabs;
+
+
 
     private int lastHumanIndex = -1;
     private int lastCarIndex = -1;
@@ -26,7 +34,7 @@ public class Spawner : MonoBehaviour
         if (spawnHuman)
             SpawnPeople();
         else
-            SpawnCar();
+            SpawnTaxi();
     }
 
     public void SpawnPeople()
@@ -55,7 +63,7 @@ public class Spawner : MonoBehaviour
         lastHumanIndex = randomIndex;
     }
 
-    public void SpawnCar()
+    public void SpawnTaxi()
     {
         if (npc_car_prefabs == null || npc_car_prefabs.Length == 0)
         {
@@ -74,9 +82,35 @@ public class Spawner : MonoBehaviour
             }
         }
 
-        MoveableObject car = Instantiate(npc_car_prefabs[randomIndex]);
-        car.network = carNetwork;
-        car.Spawn();
+        MoveableObject taxi = Instantiate(npc_car_prefabs[randomIndex]);
+        taxi.network = carNetwork;
+        taxi.Spawn();
+
+        lastCarIndex = randomIndex;
+    }
+
+    public void SpawnTruck()
+    {
+        if (npc_truck_prefabs == null || npc_truck_prefabs.Length == 0)
+        {
+            Debug.LogWarning("No car prefabs assigned.");
+            return;
+        }
+
+        int randomIndex = Random.Range(0, npc_truck_prefabs.Length);
+
+        // Prevent same prefab twice in a row
+        if (npc_truck_prefabs.Length > 1)
+        {
+            while (randomIndex == lastCarIndex)
+            {
+                randomIndex = Random.Range(0, npc_truck_prefabs.Length);
+            }
+        }
+
+        MoveableObject truck = Instantiate(npc_truck_prefabs[randomIndex]);
+        truck.network = carNetwork;
+        truck.Spawn();
 
         lastCarIndex = randomIndex;
     }
