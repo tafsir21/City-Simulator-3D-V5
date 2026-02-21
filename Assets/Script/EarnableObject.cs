@@ -8,6 +8,17 @@ public class EarnableObject : MonoBehaviour
     private float timer;
     private bool isEarning = true;
 
+    private void Start()
+    {
+        GameManager.instance.RegisterIncome(earnableObjectSO.moneyPerSecond);
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.instance.UnregisterIncome(earnableObjectSO.moneyPerSecond);
+    }
+
+
     void Update()
     {
         if (!isEarning || earnableObjectSO == null) return;
@@ -25,10 +36,7 @@ public class EarnableObject : MonoBehaviour
     {
         GameManager.instance.AddMoney(earnableObjectSO.moneyPerSecond);
 
-        for (int i = 0; i < earnableObjectSO.moneyPerSecond; i++)
-        {
-            SpawnCash();
-        }
+        StartCoroutine(SpawnCashWithDelay());
     }
 
     void SpawnCash()
@@ -42,14 +50,22 @@ public class EarnableObject : MonoBehaviour
         StartCoroutine(JumpToTaxOffice(cash));
     }
 
+    IEnumerator SpawnCashWithDelay()
+    {
+        for (int i = 0; i < earnableObjectSO.moneyPerSecond; i++)
+        {
+            SpawnCash();
+            yield return new WaitForSeconds(0.15f); // small delay between each cash
+        }
+    }
     IEnumerator JumpToTaxOffice(GameObject cash)
     {
         Vector3 start = cash.transform.position;
         Vector3 target = GameManager.instance.taxOfficeTransform.position;
 
-        float duration = 0.8f;
+        float duration = 1.5f;
         float elapsed = 0f;
-        float height = 2f;
+        float height = 10f;
 
         while (elapsed < duration)
         {

@@ -6,112 +6,50 @@ public class Spawner : MonoBehaviour
     public MoveableObject_Network humanNetwork;
     public MoveableObject_Network carNetwork;
 
-
-    [Header("Humans")]
+    [Header("Prefabs")]
     public MoveableObject[] npc_human_prefabs;
-
-    [Header("Cars (Taxi)")]
     public MoveableObject[] npc_car_prefabs;
-
-    [Header("Truck")]
     public MoveableObject[] npc_truck_prefabs;
-
-
 
     private int lastHumanIndex = -1;
     private int lastCarIndex = -1;
-
-    private void Start()
-    {
-        lastHumanIndex = -1;
-        lastCarIndex = -1;
-    }
+    private int lastTruckIndex = -1;
 
     public void SpawnRandomObject()
     {
-        bool spawnHuman = Random.value > 0.5f;
-
-        if (spawnHuman)
+        if (Random.value > 0.5f)
             SpawnPeople();
         else
             SpawnTaxi();
     }
 
-    public void SpawnPeople()
+    public void SpawnPeople()  => SpawnFrom(npc_human_prefabs, humanNetwork, ref lastHumanIndex, "human");
+    public void SpawnTaxi()    => SpawnFrom(npc_car_prefabs,   carNetwork,   ref lastCarIndex,   "car");
+    public void SpawnTruck()   => SpawnFrom(npc_truck_prefabs, carNetwork,   ref lastTruckIndex, "truck");
+
+    private void SpawnFrom(MoveableObject[] prefabs, MoveableObject_Network network, ref int lastIndex, string label)
     {
-        if (npc_human_prefabs == null || npc_human_prefabs.Length == 0)
+        if (prefabs == null || prefabs.Length == 0)
         {
-            Debug.LogWarning("No human prefabs assigned.");
+            Debug.LogWarning($"No {label} prefabs assigned.");
             return;
         }
 
-        int randomIndex = Random.Range(0, npc_human_prefabs.Length);
+        int index = GetUniqueRandomIndex(prefabs.Length, lastIndex);
+        lastIndex = index;
 
-        // Prevent same prefab twice in a row
-        if (npc_human_prefabs.Length > 1)
-        {
-            while (randomIndex == lastHumanIndex)
-            {
-                randomIndex = Random.Range(0, npc_human_prefabs.Length);
-            }
-        }
-
-        MoveableObject people = Instantiate(npc_human_prefabs[randomIndex]);
-        people.network = humanNetwork;
-        people.Spawn();
-
-        lastHumanIndex = randomIndex;
+        MoveableObject obj = Instantiate(prefabs[index]);
+        obj.network = network;
+        obj.Spawn();
     }
 
-    public void SpawnTaxi()
+    private int GetUniqueRandomIndex(int length, int lastIndex)
     {
-        if (npc_car_prefabs == null || npc_car_prefabs.Length == 0)
-        {
-            Debug.LogWarning("No car prefabs assigned.");
-            return;
-        }
+        if (length == 1) return 0;
 
-        int randomIndex = Random.Range(0, npc_car_prefabs.Length);
-
-        // Prevent same prefab twice in a row
-        if (npc_car_prefabs.Length > 1)
-        {
-            while (randomIndex == lastCarIndex)
-            {
-                randomIndex = Random.Range(0, npc_car_prefabs.Length);
-            }
-        }
-
-        MoveableObject taxi = Instantiate(npc_car_prefabs[randomIndex]);
-        taxi.network = carNetwork;
-        taxi.Spawn();
-
-        lastCarIndex = randomIndex;
-    }
-
-    public void SpawnTruck()
-    {
-        if (npc_truck_prefabs == null || npc_truck_prefabs.Length == 0)
-        {
-            Debug.LogWarning("No car prefabs assigned.");
-            return;
-        }
-
-        int randomIndex = Random.Range(0, npc_truck_prefabs.Length);
-
-        // Prevent same prefab twice in a row
-        if (npc_truck_prefabs.Length > 1)
-        {
-            while (randomIndex == lastCarIndex)
-            {
-                randomIndex = Random.Range(0, npc_truck_prefabs.Length);
-            }
-        }
-
-        MoveableObject truck = Instantiate(npc_truck_prefabs[randomIndex]);
-        truck.network = carNetwork;
-        truck.Spawn();
-
-        lastCarIndex = randomIndex;
+        int index;
+        do { index = Random.Range(0, length); }
+        while (index == lastIndex);
+        return index;
     }
 }
