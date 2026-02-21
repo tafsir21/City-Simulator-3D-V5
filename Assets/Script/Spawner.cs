@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -8,6 +9,7 @@ public class Spawner : MonoBehaviour
 
     [Header("Static Prefabs")]
     public StaticObject taxOfficeV2;
+    public StaticObject hospital;
 
     [Header("Moveable Prefabs")]
     public MoveableObject[] npc_human_prefabs;
@@ -36,11 +38,39 @@ public class Spawner : MonoBehaviour
     {
         if (!taxOfficeV2.gameObject.activeSelf)
         {
-            taxOfficeV2.gameObject.SetActive(true);
-            taxOfficeV2.PlayEffectAnim();        
-            taxOfficeV2.PlayDropAnim();        
+            StartCoroutine(SpawnWithDelay(taxOfficeV2.transform, () =>
+            {
+                taxOfficeV2.gameObject.SetActive(true);
+                taxOfficeV2.PlayEffectAnim();
+                taxOfficeV2.PlayDropAnim();
+            }));
         }
     }
+
+    public void SpwanHospital()
+    {
+        if (!hospital.gameObject.activeSelf)
+        {
+            StartCoroutine(SpawnWithDelay(hospital.transform, () =>
+            {
+                hospital.gameObject.SetActive(true);
+                hospital.PlayEffectAnim();
+                hospital.PlayDropAnim();
+            }));
+        }
+    }
+
+
+
+    IEnumerator SpawnWithDelay(Transform target, System.Action spawnAction)
+    {
+        CameraMovement.Instance.FocusOnTarget(target);
+
+        yield return new WaitForSeconds(0.5f);
+
+        spawnAction?.Invoke();
+    }
+
 
     private void SpawnFrom(MoveableObject[] prefabs, MoveableObject_Network network, ref int lastIndex, string label)
     {
