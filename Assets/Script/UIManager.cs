@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
 
+    public TextMeshProUGUI LeaderBoardmoneyText; 
     public TextMeshProUGUI moneyText; 
     public TextMeshProUGUI perSecond_incomeText; 
 
@@ -24,6 +25,7 @@ public class UIManager : MonoBehaviour
     public void UpdateMoneyUI(int money)
     {
         moneyText.text = "$"+money.ToString();
+        LeaderBoardmoneyText.text = "6. You $" + money.ToString();
     }
     public void UpdateIncomePerSecondUI(int money)
     {
