@@ -3,7 +3,7 @@ using UnityEngine;
 public class MoveableObject : MonoBehaviour
 {
     public float speed = 2f;
-    public MoveableObject_Network network;   // assign in prefab
+    public MoveableObject_Network network;
 
     private MoveableObject_Route currentRoute;
     private int nodeIndex;
@@ -11,13 +11,12 @@ public class MoveableObject : MonoBehaviour
 
     public void Spawn()
     {
-        if (network == null)
-        {
-            Debug.LogError("No network assigned to " + gameObject.name);
-            return;
-        }
+        if (network == null)                                   { Debug.LogError("No network: " + gameObject.name); return; }
+        if (network.gates == null || network.gates.Count == 0) { Debug.LogError("No gates: "   + gameObject.name); return; }
 
         currentGate = network.gates[Random.Range(0, network.gates.Count)];
+        if (currentGate == null) return;
+
         transform.position = currentGate.position;
         ChooseNewRoute();
     }
@@ -27,17 +26,19 @@ public class MoveableObject : MonoBehaviour
         if (currentRoute == null) return;
 
         Transform target = currentRoute.GetNode(nodeIndex);
+        if (target == null) return;
 
-        Vector3 targetPos = target.position;
-        Vector3 toTarget = targetPos - transform.position;
+        Vector3 targetPos  = target.position;
+        Vector3 currentPos = transform.position;
 
-        Vector2 flat = new Vector2(toTarget.x, toTarget.z);
+        // how far we'd travel this frame
+        float stepSize = speed * Time.deltaTime;
+        float distance = Vector3.Distance(currentPos, targetPos);
 
-        if (flat.sqrMagnitude < 0.04f)   // arrived horizontally
+        if (distance <= stepSize)
         {
-            // snap exactly to node height
-            transform.position = new Vector3(targetPos.x, targetPos.y, targetPos.z);
-
+            // snap exactly to node, no overshoot
+            transform.position = targetPos;
             nodeIndex++;
 
             if (nodeIndex >= currentRoute.NodeCount)
@@ -46,33 +47,37 @@ public class MoveableObject : MonoBehaviour
                 return;
             }
 
-            target = currentRoute.GetNode(nodeIndex);
-            toTarget = target.position - transform.position;
+            return; // next node starts next frame
         }
 
-        // movement
-        Vector3 moveDir = toTarget.normalized;
-        transform.position += moveDir * speed * Time.deltaTime;
+        // safe normalized direction
+        Vector3 moveDir = (targetPos - currentPos) / distance; // manual normalize, avoids near-zero issues
+        transform.position = currentPos + moveDir * stepSize;
 
+        // rotation — horizontal only
         Vector3 lookDir = new Vector3(moveDir.x, 0f, moveDir.z);
-
         if (lookDir.sqrMagnitude > 0.001f)
         {
-            Quaternion rot = Quaternion.LookRotation(lookDir);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rot, 10f * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                Quaternion.LookRotation(lookDir),
+                10f * Time.deltaTime
+            );
         }
     }
 
     void Respawn()
     {
+        if (currentRoute == null || currentRoute.endGate == null) return;
+
         currentGate = currentRoute.endGate;
         transform.position = currentGate.position;
-
         ChooseNewRoute();
 
         if (currentRoute == null)
         {
             currentGate = network.GetRandomGateExcept(currentGate);
+            if (currentGate == null) return;
             transform.position = currentGate.position;
             ChooseNewRoute();
         }
@@ -82,7 +87,6 @@ public class MoveableObject : MonoBehaviour
     {
         currentRoute = network.GetRandomRoute(currentGate);
         if (currentRoute == null) return;
-
         nodeIndex = 0;
     }
 }
