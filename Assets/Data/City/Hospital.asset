@@ -14,14 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: Hospital
   icon: {fileID: 21300000, guid: 36ffd601196c6dd47a917da8b593af87, type: 3}
-  price: 40
+  basePrice: 100
   moneyPerSecond: 3
   cashPrefab: {fileID: 3401879956718678042, guid: 89c4573290f3c6b42b5c4d4b16d2dbe1, type: 3}
   isTaxOfficeObject: 0
   type: 0
   hasVariants: 0
-  staticPrefab: {fileID: 1415807966526072035, guid: 06f764f1e229539429cae9b0290ffea0, type: 3}
-  staticVariants: []
   moveablePrefab: {fileID: 0}
   moveableVariants: []
   networkType: 0
+  spawnCount: 0

@@ -14,14 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: People
   icon: {fileID: 21300000, guid: cfffd22a6ef9cdd4eaccf20723d09ee5, type: 3}
-  price: 17
+  basePrice: 20
   moneyPerSecond: 1
   cashPrefab: {fileID: 3401879956718678042, guid: 89c4573290f3c6b42b5c4d4b16d2dbe1, type: 3}
   isTaxOfficeObject: 0
   type: 1
   hasVariants: 0
-  staticPrefab: {fileID: 0}
-  staticVariants: []
   moveablePrefab: {fileID: 5092082896960193510, guid: 65bf75a1e74107e4aae2df74160567a3, type: 3}
   moveableVariants: []
   networkType: 0
+  spawnCount: 0

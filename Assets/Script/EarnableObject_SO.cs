@@ -8,22 +8,23 @@ public class EarnableObject_SO : ScriptableObject
 {
     public string objectName;
     public Sprite icon;
-    public int price;
+    public int basePrice;       // original price, never changes
     public int moneyPerSecond;
     public GameObject cashPrefab;
     public bool isTaxOfficeObject = false;
 
     public EarnableObjectType type;
 
-    [Header("Variants")]
+    [Header("Moveable")]
     public bool hasVariants = false;
-
-    // For Static
-    public StaticObject staticPrefab;
-    public StaticObject[] staticVariants;
-
-    // For Moveable
     public MoveableObject moveablePrefab;
     public MoveableObject[] moveableVariants;
-    public MoveableNetworkType networkType; // Human or Car — Spawner resolves the actual network
+    public MoveableNetworkType networkType;
+
+    // ── RUNTIME ──────────────────────────────────────────────────────────────
+    [HideInInspector] public int spawnCount = 0; // how many have been spawned
+
+    public int CurrentPrice => type == EarnableObjectType.Static
+        ? basePrice
+        : Mathf.RoundToInt(basePrice * Mathf.Pow(2, spawnCount)); // 3x per spawn
 }

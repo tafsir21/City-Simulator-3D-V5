@@ -23,11 +23,14 @@ public class Spawner : MonoBehaviour
 
     public void Spawn(EarnableObject_SO so)
     {
+        if (!GameManager.instance.CanAfford(so)) return;
+        if (!GameManager.instance.RemoveMoney(so.CurrentPrice)) return;
+
+        so.spawnCount++;
+
         if (so.type == EarnableObjectType.Static) SpawnStatic(so);
         else                                       SpawnMoveable(so);
     }
-
-    // ── STATIC ───────────────────────────────────────────────────────────────
 
     void SpawnStatic(EarnableObject_SO so)
     {
@@ -37,6 +40,7 @@ public class Spawner : MonoBehaviour
         if (target == null) { Debug.LogError($"No scene object found for {so.objectName}"); return; }
 
         spawnedStatics.Add(so.objectName);
+        GameManager.instance.RegisterIncome(so.moneyPerSecond); // only fires once
 
         StartCoroutine(SpawnWithDelay(target.transform, () =>
         {
@@ -46,8 +50,6 @@ public class Spawner : MonoBehaviour
         }));
     }
 
-    // ── MOVEABLE ─────────────────────────────────────────────────────────────
-
     void SpawnMoveable(EarnableObject_SO so)
     {
         MoveableObject prefab = PickMoveable(so);
@@ -55,6 +57,8 @@ public class Spawner : MonoBehaviour
 
         MoveableObject_Network network = ResolveNetwork(so);
         if (network == null) { Debug.LogError($"No network resolved for {so.objectName}"); return; }
+
+        GameManager.instance.RegisterIncome(so.moneyPerSecond); // fires every spawn
 
         MoveableObject obj = Instantiate(prefab);
         obj.network = network;

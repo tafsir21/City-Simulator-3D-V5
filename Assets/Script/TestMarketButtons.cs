@@ -12,6 +12,7 @@ public class TestMarketButtons : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("BuildButtons called");
         BuildButtons(GameManager.instance.staticObjects,   staticButtonContainer);
         BuildButtons(GameManager.instance.moveableObjects, moveableButtonContainer);
     }

@@ -8,10 +8,6 @@ public class EarnableObject : MonoBehaviour
     private float timer;
     private bool isEarning = true;
 
-    private void Start()
-    {
-        GameManager.instance.RegisterIncome(earnableObjectSO.moneyPerSecond);
-    }
 
     private void OnDestroy()
     {

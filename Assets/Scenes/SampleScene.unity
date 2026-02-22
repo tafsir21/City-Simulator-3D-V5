@@ -12305,6 +12305,7 @@ MonoBehaviour:
   staticSceneObjects:
   - {fileID: 613230732}
   - {fileID: 206274471}
+  startingMoney: 200
   money: 0
   incomePerSecond: 0
 --- !u!114 &2026027529
