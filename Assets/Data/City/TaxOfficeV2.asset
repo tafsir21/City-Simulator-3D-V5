@@ -13,8 +13,15 @@ MonoBehaviour:
   m_Name: TaxOfficeV2
   m_EditorClassIdentifier: 
   objectName: Tax Office V2
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 36ffd601196c6dd47a917da8b593af87, type: 3}
   price: 2
   moneyPerSecond: 2
   cashPrefab: {fileID: 3401879956718678042, guid: 89c4573290f3c6b42b5c4d4b16d2dbe1, type: 3}
   isTaxOfficeObject: 1
+  type: 0
+  hasVariants: 0
+  staticPrefab: {fileID: 3716136263776686773, guid: fb39bd4a8cb1d0649b71e0761bec33c0, type: 3}
+  staticVariants: []
+  moveablePrefab: {fileID: 0}
+  moveableVariants: []
+  networkType: 0

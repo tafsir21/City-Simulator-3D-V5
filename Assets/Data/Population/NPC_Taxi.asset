@@ -18,13 +18,13 @@ MonoBehaviour:
   moneyPerSecond: 2
   cashPrefab: {fileID: 3401879956718678042, guid: 89c4573290f3c6b42b5c4d4b16d2dbe1, type: 3}
   isTaxOfficeObject: 0
+  type: 1
   hasVariants: 1
+  staticPrefab: {fileID: 0}
+  staticVariants: []
+  moveablePrefab: {fileID: 8111806440455551414, guid: a485d3c8af50db247accb7a81b149d6a, type: 3}
   moveableVariants:
   - {fileID: 8111806440455551414, guid: a485d3c8af50db247accb7a81b149d6a, type: 3}
   - {fileID: 1834230198277461015, guid: 588a0a7fbfaf87f4d89a95ff6133cfe5, type: 3}
   - {fileID: 8906954571724014902, guid: 767710bf844fb5144a63db13f21897fc, type: 3}
-  staticVariants: []
-  type: 0
-  staticPrefab: {fileID: 0}
-  moveablePrefab: {fileID: 0}
-  network: {fileID: 0}
+  networkType: 1
