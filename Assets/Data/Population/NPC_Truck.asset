@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: Truck
   icon: {fileID: 519339611, guid: 55ccc15c2dcc8e74fbf4c578fe774066, type: 3}
-  basePrice: 60
+  basePrice: 120
   moneyPerSecond: 3
   cashPrefab: {fileID: 3401879956718678042, guid: 89c4573290f3c6b42b5c4d4b16d2dbe1, type: 3}
   isTaxOfficeObject: 0

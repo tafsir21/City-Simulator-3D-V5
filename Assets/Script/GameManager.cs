@@ -13,17 +13,23 @@ public class GameManager : MonoBehaviour
     [Header("Static Scene Objects (same order as staticObjects list)")]
     public List<StaticObject> staticSceneObjects;
 
+    [Header("Money")]
     [SerializeField] private int startingMoney = 200;
     [SerializeField] private int money = 0;
     [SerializeField] private int incomePerSecond = 0;
+
+    [Header("Boost")]
+    public float incomeMultiplierValue = 1.2f;
+    public float incomeMultiplier = 1f;
 
     private void Awake()
     {
         if (instance == null)
             instance = this;
 
-        money = 0;
-        incomePerSecond = 0; // reset serialized value
+        money            = 0;
+        incomePerSecond  = 0;
+        incomeMultiplier = 1f;
 
         foreach (var so in staticObjects)   if (so != null) so.spawnCount = 0;
         foreach (var so in moveableObjects) if (so != null) so.spawnCount = 0;
@@ -49,12 +55,19 @@ public class GameManager : MonoBehaviour
 
     public bool CanAfford(EarnableObject_SO so) => money >= so.CurrentPrice;
 
+    public void SetIncomeMultiplier(float value)
+    {
+        incomeMultiplier = value;
+    }
+
+    public float GetIncomeMultiplier() => incomeMultiplier;
+
     public void RegisterIncome(int amount)
     {
         incomePerSecond += amount;
-        Debug.Log($"RegisterIncome | amount: {amount} | total: {incomePerSecond}\n{System.Environment.StackTrace}", this);
         UIManager.instance.UpdateIncomePerSecondUI(incomePerSecond);
     }
+
     public void UnregisterIncome(int amount)
     {
         incomePerSecond -= amount;

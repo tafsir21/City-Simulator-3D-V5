@@ -30,12 +30,11 @@ public class EarnableObject : MonoBehaviour
 
     void EarnMoney()
     {
-        GameManager.instance.AddMoney(earnableObjectSO.moneyPerSecond);
+        int earned = Mathf.RoundToInt(earnableObjectSO.moneyPerSecond * GameManager.instance.incomeMultiplier);
+        GameManager.instance.AddMoney(earned);
 
         if (!earnableObjectSO.isTaxOfficeObject)
-        {
             StartCoroutine(SpawnCashWithDelay());
-        }
     }
 
     void SpawnCash()

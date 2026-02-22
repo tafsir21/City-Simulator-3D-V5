@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class CameraMovement : MonoBehaviour
 
     [Header("Focus Settings")]
     public float focusSmoothTime = 0.3f;
-    public float focusForwardOffset = 5f; // adjust in inspector
+    public float focusForwardOffset = 5f;
 
     private Vector3 lastTouchPosition;
     private bool isDragging;
@@ -27,7 +28,6 @@ public class CameraMovement : MonoBehaviour
             Instance = this;
     }
 
-
     void Start()
     {
         cam = GetComponentInChildren<Camera>();
@@ -41,13 +41,28 @@ public class CameraMovement : MonoBehaviour
             SmoothMoveToTarget();
     }
 
+    bool IsPointerOverUI()
+    {
+        if (EventSystem.current == null) return false;
+
+        #if UNITY_EDITOR || UNITY_STANDALONE
+                return EventSystem.current.IsPointerOverGameObject();
+        #else
+                if (Input.touchCount > 0)
+                    return EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
+                return false;
+        #endif
+    }
+
     public void HandleMouse()
     {
         if (Input.GetMouseButtonDown(0))
         {
+            if (IsPointerOverUI()) return; // block drag if touching UI
+
             lastTouchPosition = Input.mousePosition;
             isDragging = true;
-            isFocusing = false; 
+            isFocusing = false;
         }
 
         if (Input.GetMouseButton(0) && isDragging)
@@ -85,7 +100,6 @@ public class CameraMovement : MonoBehaviour
         pos.z = Mathf.Clamp(pos.z, limitZ.x, limitZ.y);
         transform.position = pos;
     }
-
 
     public void FocusOnTarget(Transform target)
     {

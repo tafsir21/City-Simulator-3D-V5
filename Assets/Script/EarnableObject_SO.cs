@@ -25,5 +25,5 @@ public class EarnableObject_SO : ScriptableObject
 
     public int CurrentPrice => type == EarnableObjectType.Static
         ? basePrice
-        : Mathf.RoundToInt(basePrice * Mathf.Pow(2, spawnCount)); 
+        : Mathf.RoundToInt(basePrice * Mathf.Pow(1.5f, spawnCount)); 
 }
