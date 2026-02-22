@@ -17,3 +17,4 @@ MonoBehaviour:
   price: 0
   moneyPerSecond: 2
   cashPrefab: {fileID: 3401879956718678042, guid: 89c4573290f3c6b42b5c4d4b16d2dbe1, type: 3}
+  isTaxOfficeObject: 0
