@@ -1,10 +1,15 @@
-// GameManager.cs
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public Transform taxOfficeTransform;
+
+    [Header("Earnable Object Lists")]
+    public List<EarnableObject_SO> staticObjects;
+    public List<EarnableObject_SO> moveableObjects;
+
     [SerializeField] private int money = 0;
     [SerializeField] private int incomePerSecond = 0;
 
@@ -47,6 +52,6 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-    public int GetCurrentMoney() => money;
+    public int GetCurrentMoney()    => money;
     public int GetIncomePerSecond() => incomePerSecond;
 }
