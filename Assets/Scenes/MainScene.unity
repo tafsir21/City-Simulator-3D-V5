@@ -5744,9 +5744,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1323775367}
   - {fileID: 774088865}
   - {fileID: 922959851}
+  - {fileID: 1323775367}
   m_Father: {fileID: 150890669}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -15393,7 +15393,7 @@ MonoBehaviour:
   staticSceneObjects:
   - {fileID: 206274471}
   - {fileID: 613230732}
-  startingMoney: 20
+  startingMoney: 40
   money: 0
   incomePerSecond: 0
   incomeMultiplierValue: 1.3

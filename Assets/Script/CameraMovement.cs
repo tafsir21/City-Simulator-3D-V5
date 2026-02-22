@@ -46,14 +46,20 @@ public class CameraMovement : MonoBehaviour
         if (EventSystem.current == null) return false;
 
         #if UNITY_EDITOR || UNITY_STANDALONE
-                return EventSystem.current.IsPointerOverGameObject();
+            return EventSystem.current.IsPointerOverGameObject();
         #else
-                if (Input.touchCount > 0)
-                    return EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
-                return false;
+            if (Input.touchCount == 0) return false;
+
+            PointerEventData eventData = new PointerEventData(EventSystem.current)
+            {
+                position = Input.GetTouch(0).position
+            };
+
+            var results = new System.Collections.Generic.List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventData, results);
+            return results.Count > 0;
         #endif
     }
-
     public void HandleMouse()
     {
         if (Input.GetMouseButtonDown(0))
