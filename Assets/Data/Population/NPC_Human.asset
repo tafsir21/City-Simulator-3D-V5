@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NPC_Human
   m_EditorClassIdentifier: 
   objectName: People
-  icon: {fileID: 21300000, guid: cfffd22a6ef9cdd4eaccf20723d09ee5, type: 3}
+  icon: {fileID: 21300000, guid: a76f63770e2a3994192f8e298be43346, type: 3}
   basePrice: 20
   moneyPerSecond: 1
   cashPrefab: {fileID: 3401879956718678042, guid: 89c4573290f3c6b42b5c4d4b16d2dbe1, type: 3}

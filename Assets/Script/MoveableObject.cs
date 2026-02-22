@@ -31,7 +31,6 @@ public class MoveableObject : MonoBehaviour
         Vector3 targetPos = target.position;
         Vector3 toTarget = targetPos - transform.position;
 
-        // -------- HORIZONTAL DISTANCE CHECK --------
         Vector2 flat = new Vector2(toTarget.x, toTarget.z);
 
         if (flat.sqrMagnitude < 0.04f)   // arrived horizontally
@@ -51,11 +50,10 @@ public class MoveableObject : MonoBehaviour
             toTarget = target.position - transform.position;
         }
 
-        // -------- MOVEMENT --------
+        // movement
         Vector3 moveDir = toTarget.normalized;
         transform.position += moveDir * speed * Time.deltaTime;
 
-        // -------- ROTATION (no tilting) --------
         Vector3 lookDir = new Vector3(moveDir.x, 0f, moveDir.z);
 
         if (lookDir.sqrMagnitude > 0.001f)

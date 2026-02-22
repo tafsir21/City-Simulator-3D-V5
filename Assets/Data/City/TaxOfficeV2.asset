@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TaxOfficeV2
   m_EditorClassIdentifier: 
   objectName: Tax Office V2
-  icon: {fileID: 21300000, guid: 36ffd601196c6dd47a917da8b593af87, type: 3}
+  icon: {fileID: 1125856191, guid: 83bd8a10eab585b4c90ab853d4321797, type: 3}
   basePrice: 80
   moneyPerSecond: 2
   cashPrefab: {fileID: 3401879956718678042, guid: 89c4573290f3c6b42b5c4d4b16d2dbe1, type: 3}

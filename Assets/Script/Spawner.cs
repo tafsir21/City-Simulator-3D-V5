@@ -78,8 +78,6 @@ public class Spawner : MonoBehaviour
         return so.networkType == MoveableNetworkType.Human ? humanNetwork : carNetwork;
     }
 
-    // ── HELPERS ──────────────────────────────────────────────────────────────
-
     int GetUniqueRandomIndex(int length, string key)
     {
         if (!lastVariantIndex.ContainsKey(key)) lastVariantIndex[key] = -1;
