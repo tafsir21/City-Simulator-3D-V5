@@ -94,6 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 4895784344862687556}
   label: {fileID: 4123499952399235878}
+  price: {fileID: 6974573150095833989}
   button: {fileID: 2450669038274745059}
 --- !u!114 &2450669038274745059
 MonoBehaviour:
@@ -500,7 +501,7 @@ GameObject:
   - component: {fileID: 5128908108697410093}
   - component: {fileID: 571981745142813113}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Price Tag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

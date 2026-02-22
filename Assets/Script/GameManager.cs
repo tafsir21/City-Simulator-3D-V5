@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     public List<EarnableObject_SO> staticObjects;
     public List<EarnableObject_SO> moveableObjects;
 
+    [Header("Static Scene Objects (same order as staticObjects list)")]
+    public List<StaticObject> staticSceneObjects;
+
     [SerializeField] private int money = 0;
     [SerializeField] private int incomePerSecond = 0;
 
@@ -17,6 +20,16 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
+
+        foreach (var obj in staticSceneObjects)
+            if (obj != null) obj.gameObject.SetActive(false);
+    }
+
+    public StaticObject GetStaticSceneObject(EarnableObject_SO so)
+    {
+        int index = staticObjects.IndexOf(so);
+        if (index < 0 || index >= staticSceneObjects.Count) return null;
+        return staticSceneObjects[index];
     }
 
     public void RegisterIncome(int amount)

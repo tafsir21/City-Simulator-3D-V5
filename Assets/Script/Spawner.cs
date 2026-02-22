@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour
     public MoveableObject_Network humanNetwork;
     public MoveableObject_Network carNetwork;
 
-    private HashSet<string> spawnedStatics    = new HashSet<string>();
+    private HashSet<string> spawnedStatics = new HashSet<string>();
     private Dictionary<string, int> lastVariantIndex = new Dictionary<string, int>();
 
     public List<EarnableObject_SO> StaticObjects   => GameManager.instance.staticObjects;
@@ -32,10 +32,11 @@ public class Spawner : MonoBehaviour
     void SpawnStatic(EarnableObject_SO so)
     {
         if (spawnedStatics.Contains(so.objectName)) return;
-        spawnedStatics.Add(so.objectName);
 
-        StaticObject target = PickStatic(so);
-        if (target == null) { Debug.LogError($"No static prefab found for {so.objectName}"); return; }
+        StaticObject target = GameManager.instance.GetStaticSceneObject(so);
+        if (target == null) { Debug.LogError($"No scene object found for {so.objectName}"); return; }
+
+        spawnedStatics.Add(so.objectName);
 
         StartCoroutine(SpawnWithDelay(target.transform, () =>
         {
@@ -43,14 +44,6 @@ public class Spawner : MonoBehaviour
             target.PlayEffectAnim();
             target.PlayDropAnim();
         }));
-    }
-
-    StaticObject PickStatic(EarnableObject_SO so)
-    {
-        if (so.hasVariants && so.staticVariants != null && so.staticVariants.Length > 0)
-            return so.staticVariants[GetUniqueRandomIndex(so.staticVariants.Length, so.objectName)];
-
-        return so.staticPrefab;
     }
 
     // ── MOVEABLE ─────────────────────────────────────────────────────────────

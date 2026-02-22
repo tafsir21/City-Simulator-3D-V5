@@ -6,6 +6,7 @@ public class EarnableButton : MonoBehaviour
 {
     [SerializeField] private Image icon;
     [SerializeField] private TextMeshProUGUI label;
+    [SerializeField] private TextMeshProUGUI price;
     [SerializeField] private Button button;
 
     void Awake()
@@ -24,6 +25,7 @@ public class EarnableButton : MonoBehaviour
 
         if (icon != null)  icon.sprite = so.icon;
         if (label != null) label.text  = so.objectName;
+        if (price != null) price.text  = "$"+so.price.ToString();
 
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(() => onClick?.Invoke());
